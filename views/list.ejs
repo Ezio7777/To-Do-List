@@ -4,19 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDoList</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/6b5f385366.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <h1>its a <%=today%></h1>
 
-    <ul>
-    <% for(let i = 0 ;i<newListItems.length ; i++ ){ %>
-      <li><%= newListItems[i] %></li>
-    <% } %>
-    </ul>
+    <h1 id="title"><%=today%></h1>
 
-    <form action="/" method="post">
-      <input type="text" name="newItem" />
-      <button type="submit" name="button">Add</button>
-    </form>
+    <div class="container">
+
+      
+   
+        <% for(let i = 0 ;i<newListItems.length ; i++ ){ %>
+            <div class="show">
+               <input type="checkbox" >
+               <p class="list"><%= newListItems[i] %></p>
+            </div>
+          <% } %>
+    
+        <form action="/" method="post">
+          <input type="text" name="newItem" placeholder="Add New Item" autocomplete="off"/>
+          <button type="submit" name="button" class="add">+</i></button>
+        </form>
+
+    </div>
   </body>
 </html>
