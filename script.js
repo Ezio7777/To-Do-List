@@ -48,10 +48,53 @@ app.get("/", function (req, res) {
 
 app.post("/", function (req, res) {
   let item = req.body.newItem;
-  items.push(item);
+  let newI = new Item({
+    name: item,
+  });
+
+  newI.save();
+
   res.redirect("/");
 });
 
+app.post("/delete", (req, res) => {
+  const deleteItem = req.body;
+
+  Item.deleteOne({ _id: deleteItem.checkbox })
+    .then(() => {
+      console.log("Succesfully Delete");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  res.redirect("/");
+});
+
+const listSchema = new mongoose.Schema({
+  name: String,
+  items: [itemSchema],
+});
+
+const List = mongoose.model("list", listSchema);
+
+app.get("/:customList", (req, res) => {
+  let customListName = req.params.customList;
+
+  const defaultlist = new List({
+    name: customListName,
+    items: intro,
+  });
+
+  List.find({ name: customListName })
+    .then((found) => {
+      console.log(found);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 app.listen(3000, function () {
-  console.log("Port Started");
+  console.log("Port Started : 3000");
 });

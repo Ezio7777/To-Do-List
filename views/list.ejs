@@ -15,12 +15,14 @@
 
       
    
-        <% for(let i = 0 ;i<newListItems.length;i++){ %>
+        <% newListItems.forEach((item)=>{ %>
+          <form action="/delete" method="post">
             <div class="show">
-               <input type="checkbox" >
-               <p class="list"><%= newListItems[i].name %></p>
+              <input type="checkbox" name="checkbox" onclick="this.form.submit()" value = "<%= item._id %>">
+              <p class="list"><%= item.name %></p>
             </div>
-        <% } %>
+          </form>
+        <% }); %>
     
         <form action="/" method="post">
           <input type="text" name="newItem" placeholder="Add New Item" autocomplete="off"/>
